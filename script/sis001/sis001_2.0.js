@@ -1,4 +1,26 @@
-'use strict';   //严格模式
+'use strict';
+//严格模式
+
+// 下面的的192.168.200.3要修改为你的后端地址
+
+// ==UserScript==
+// @name         sis001小说下载
+// @namespace    瑶玲
+// @version      0.1
+// @description  下载sis001页面上的小说内容
+// @author       瑶玲
+// @include      http://www.sis001.com/*
+// @include      https://www.sis001.com/*
+// @icon         http://www.sis001.com/favicon.ico
+// @require      https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js
+// @require      https://unpkg.com/axios/dist/axios.min.js
+// @resource     customCSS https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css
+// @require      https://cdn.jsdelivr.net/npm/vue
+// @grant        unsafeWindow
+// @grant        GM_xmlhttpRequest
+// @grant        GM_download
+// @connect      sis001.com
+// @connect      192.168.200.3
 
 // @match        *://www.sis001.com/forum/forum-*-*.html
 // @match        *://www.sis001.com/bbs/forum-*-*.html
@@ -6,12 +28,13 @@
 // @match        *://www.sis001.com/forum/search.php*
 // @match        *://www.sis001.com/forum/index.php
 // @match        *://www.sis001.com/forum/forumdisplay.php?fid=*&page=*
+// ==/UserScript==
 
 // 公共变量
-const host = "http://127.0.0.1:8000/"     // 这里填写你后端的地址
+const host = "http://192.168.200.3:8000/"     // 这里填写你后端的地址
 const token = "27171cc46f6bda2668ca755810635e577f600fa4"      // 这里填写你后端的token
 const url = window.location.href;     // 获取当前页网址
-const xiaosuo_list = ["人妻意淫区", "文学作者区", "原创人生区", "原创人生区（征文主题发布区）", "旧文展览馆", "乱伦迷情区", "武侠玄幻区", "重口另类区", "长篇收藏区", "征文活动区"]   // 小说板块名称列表  "藏书管理区", 
+const xiaosuo_list = ["人妻意淫区", "文学作者区", "原创人生区", "原创人生区（征文主题发布区）", "旧文展览馆", "乱伦迷情区", "武侠玄幻区", "重口另类区", "长篇收藏区", "征文活动区"]   // 小说板块名称列表  "藏书管理区",
 const img_list = [""]   // 图片板块名称列表
 
 // 去除头顶广告
@@ -404,11 +427,15 @@ function zhangjiesave(data, b_id) {
 
 (async function () {
     console.log("sis001脚本运行")
-    let is_xq = await is_thread()        // 详情页判断
-    let is_list = await is_forum()      // 列表页判断
-    let is_sousuo = await is_search()      // 搜索页判断
+    let is_xq = await is_thread()
+    // 详情页判断
+    let is_list = await is_forum()
+    // 列表页判断
+    let is_sousuo = await is_search()
+    // 搜索页判断
 
-    document.getElementsByTagName("head")[0].innerHTML += '<link rel="stylesheet" href="//at.alicdn.com/t/font_2616980_8iw3dgaotf4.css">';  // 加入样式
+    document.getElementsByTagName("head")[0].innerHTML += '<link rel="stylesheet" href="//at.alicdn.com/t/font_2616980_8iw3dgaotf4.css">';
+    // 加入样式
 
     // 列表页部分
     if (is_list) {
@@ -429,10 +456,14 @@ function zhangjiesave(data, b_id) {
 
     // 内容页部分
     if (is_xq) {
-        ad_del();   // 去除头部广告
-        let type = await is_thread_type()    // 判断页面类型
-        let book_name = ""  // 标题初始化
-        let index_int = 1   // 序号初始化
+        ad_del();
+        // 去除头部广告
+        let type = await is_thread_type()
+        // 判断页面类型
+        let book_name = ""
+        // 标题初始化
+        let index_int = 1
+        // 序号初始化
         if (type) {
             console.log("开始识别内容")
             // 添加按钮
@@ -465,7 +496,7 @@ function zhangjiesave(data, b_id) {
             if (type == "img") {
                 select_type.value = 2
             }
-            
+
             // 获取章节标题、标签
             // let title = document.querySelector("#wrapper > div:nth-child(1) > form:nth-child(9) > div:nth-child(2) > h1")
             let title = document.querySelector("#wrapper > div:nth-child(1) > form > div:nth-child(2) > h1")
@@ -478,7 +509,7 @@ function zhangjiesave(data, b_id) {
             } catch (error) {
                 title_name = title.textContent.replace(/(^\s*)|(\s*$)/g, "")
             }
-            
+
             // 转换标题中的序号
             // let title_name_to_data = await get_cn2an(title_name)
             // console.log(title_name_to_data)
@@ -507,8 +538,10 @@ function zhangjiesave(data, b_id) {
                 shoucang()
             })
 
-            let h1 = document.getElementsByName("modactions")[0].getElementsByTagName("h1")[0];     // 获取要添加图标区域(表示是否浏览和保存的区域)
-            await is_save_thread(h1)    // 判断当前页面是否浏览与保存，如未浏览则加入浏览，未保存则保存，如其他人已保存，则加入自己的收藏
+            let h1 = document.getElementsByName("modactions")[0].getElementsByTagName("h1")[0];
+            // 获取要添加图标区域(表示是否浏览和保存的区域)
+            await is_save_thread(h1)
+            // 判断当前页面是否浏览与保存，如未浏览则加入浏览，未保存则保存，如其他人已保存，则加入自己的收藏
             console.log("内容识别完成")
         }
     }
