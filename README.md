@@ -8,7 +8,7 @@
 
 ### 脚本列表
 
-- [sis001](https://raw.githubusercontent.com/498330580/tampermonkey/main/script/sis001/sis001_2.0.js)：一个简单的脚本，用于测试油猴脚本的基本功能。
+- [sis001](https://raw.githubusercontent.com/498330580/tampermonkey/main/script/sis001/sis001_1.0.js)：一个简单的脚本，用于测试油猴脚本的基本功能。
 
 ---
 
