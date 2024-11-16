@@ -8,7 +8,7 @@
 
 ### 脚本列表
 
-- [脚本1](https://greasyfork.org/zh-CN/scripts/422200-脚本1)
+- [sis001](https://greasyfork.org/zh-CN/scripts/422200-脚本1)：一个简单的脚本，用于测试油猴脚本的基本功能。
 
 ---
 
