@@ -8,7 +8,7 @@
 
 ### 脚本列表
 
-- [sis001](https://raw.githubusercontent.com/498330580/tampermonkey/main/script/sis001/sis001_1.0.js)：一个简单的脚本，用于测试油猴脚本的基本功能。
+- [sis001](https://github.com/498330580/tampermonkey/tree/main/script/sis001)：sis001网站的脚本，用于获取sis001网站的信息，包括url、标题、标签、板块等，并保存到后端数据库中。
 
 ---
 
