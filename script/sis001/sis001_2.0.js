@@ -8,9 +8,7 @@
 // @match        *://www.sis001.com/forum/forumdisplay.php?fid=*&page=*
 
 // 公共变量
-// const host = "http://sis001.yaoling.ltd:8000/"     // 这里填写你后端的地址
-// const host = "http://127.0.0.1:8000/"     // 这里填写你后端的地址
-const host = "http://192.168.200.3:8000/"     // 这里填写你后端的地址
+const host = "http://127.0.0.1:8000/"     // 这里填写你后端的地址
 const token = "27171cc46f6bda2668ca755810635e577f600fa4"      // 这里填写你后端的token
 const url = window.location.href;     // 获取当前页网址
 const xiaosuo_list = ["人妻意淫区", "文学作者区", "原创人生区", "原创人生区（征文主题发布区）", "旧文展览馆", "乱伦迷情区", "武侠玄幻区", "重口另类区", "长篇收藏区", "征文活动区"]   // 小说板块名称列表  "藏书管理区", 
